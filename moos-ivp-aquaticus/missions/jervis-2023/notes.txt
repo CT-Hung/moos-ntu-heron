@@ -1,0 +1,39 @@
+
+
+
+Offloading (Scenario 1)
+  o Aquaticus 192.168 network is on Internet, access to Ocenai
+  o ssht (ssh onto Thomas)
+  o cdmjj; ./mhash_archive_all.sh  (create an alias for this)
+
+
+Getting moos-ivp-aquaticus/aliases.txt read automatically upon reboot
+  o modify .bashrc on each vehicle to source this file
+  
+  o Add a crontab on each robot to execute
+    moos-ivp-aquaticus/scripts/upon_robot_reboot.sh 
+
+--------------------------------------------
+
+
+
+
+surveyor/
+  pZoneTrackOpponents.moos
+     pts=$(OPFOR_ZONE)
+     point=$(UNTAG_POS)
+     opfor=$(OPFOR)
+
+surveyor/
+  pRangeEvent/
+    event_var = TAG_REQUEST=vname=$[SELFVNAME]
+
+surveyor/
+  pNodeReporter/
+      vessel_type = $(VTYPE)
+      group       = $(VTEAM)
+      platform_color = $(VTEAM)
+
+surveyor/
+  uSimMarine/
+      start_pos = $(START_POS)

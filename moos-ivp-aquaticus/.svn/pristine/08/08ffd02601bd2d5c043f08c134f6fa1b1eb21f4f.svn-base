@@ -1,0 +1,97 @@
+
+o The Aquaticus field is assumed to be a rectangle.
+o The location, rotation, and dimensions are considered to be fluid.
+o They may change based on tide, sea state or other environmental
+  factors, especially at Jervis Bay.
+
+o There are two Aquaticus coordinate systems: (1) Absolute, and (2)
+  relative to a vehicle's home side. They are depicted below.
+
+o The absolute coodinates are determined from the jerop.sh script in
+  moos-ivp-aquaticus/scripts. The set of coordinates are seeded from
+  - NW location
+  - Field Width and Depth (by default 160x80)
+  - Angle of rotation (by default 149 degrees, aligned w Jervis shoreline)
+
+o Once the Absoluted coordinates are defined, the relative coordinates
+  are mapped to the absolute coordinates depending on which side is the
+  home side.
+
+o For example, the North Flag is always at Location NCF and the South
+  flag is always at Location SCF (South-Center-FlagLine)
+  Ownship own flag is always at CF, and the other flag is always at CFX.
+
+o All Shell variables have a "T" counterpart. For example the NCF var
+  may be:
+    NCF  = x=23.4,y=99.8, and
+    NCFT = 23.4,99.8
+  This is to support places where one format is required over the other.
+  
+
+#----------------------------------------------------------------
+# ABSOLUTE NORTH-SOUTH-EAST-WEST
+#----------------------------------------------------------------
+#                      ABSOLUTE NORTH
+#
+#                   NWB        NCB       NEB        
+#     NW o---------o----------o---------o----------o NE    Row NB
+#        |                    |                    |
+#        |          NWF       |NCF       NEF       |
+#   NWWF o---------o----------o---------o----------o NEEF  Row NF
+#        |                    |                    |
+#        |          NWH       |NCH       NEH       |
+#   NWWH o---------o----------o---------o----------o NEEH  Row NH
+#        |                    |                    |
+#        |          NWM       |NCM       NEM       |
+#   NWWM o---------o----------o---------o----------o NEEM  Row NM
+#        |                    |                    |
+#        |          CPW       |(CC)      CPE       |
+#     WC o=========o==========o=========o==========o EC    Row C
+#        |                    |                    |
+#        |          SWM       |SCM       SEM       |
+#   SWWM o---------o----------o---------o----------o SEEM  Row SM
+#        |                    |                    |
+#        |          SWH       |SCH       SEH       |
+#   SWWH o---------o----------o---------o----------o SEEH  Row SH
+#        |                    |                    |
+#        |          SWF       |SCF       SEF       |
+#   SWWF o---------o----------o---------o----------o SEEF  Row SF
+#        |                    |                    |
+#        |          SWB       |SCB       SEB       |
+#     SW o---------o----------o---------o----------o SE    Row SB
+#                     ABSOLUTE SOUTH           
+#
+
+
+#=================================================================
+# Relative to ownship playing end
+#=================================================================
+#
+#                   PBX        CBX       SBX        
+#   PPBX o---------o----------o---------o----------o SSBX  Row BX
+#        |                    |                    |
+#        |          PFX       |CFX       SFX       |
+#   PPFX o---------o----------o---------o----------o SSFX  Row FX
+#        |                    |                    |
+#        |          PHX       |CHX       SHX       |
+#   PPHX o---------o----------o---------o----------o SSHX  Row HX
+#        |                    |                    |
+#        |          PMX       |CMX       SMX       |
+#   PPMX o---------o----------o---------o----------o SSMX  Row MX
+#        |                    |                    |
+#        |          PC        |CC        SC        | 
+#    PPC o=========o==========o=========o==========o SSC   Row C
+#        |                    |                    |
+#        |          PM        |CM        SM        |
+#    PPM o---------o----------o---------o----------o SSM   Row M
+#        |                    |                    |
+#        |          PH        |CH        SH        |
+#    PPH o---------o----------o---------o----------o SSH   Row H
+#        |                    |                    |
+#        |          PF        |CF        SF        |
+#    PPF o---------o----------o---------o----------o SSF   Row F
+#        |              ^     |     ^              |
+#        |          PB  |     |CB   |    SB        |
+#    PPB o---------o----------o---------o----------o SSB   Row B
+#                         HOME SIDE
+

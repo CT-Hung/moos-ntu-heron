@@ -1,0 +1,432 @@
+//*******************************************************
+// ShoreSide Configuration File
+
+ServerHost = localhost
+ServerPort = 9000
+Community  = shoreside
+
+MOOSTimeWarp = 10
+
+LatOrigin  = -35.126
+LongOrigin = 150.711
+
+
+//--------------------------------------------------------
+Processconfig = ANTLER
+{
+  MSBetweenLaunches = 100
+
+  Run = MOOSDB          @ NewConsole = false
+  Run = pLogger         @ NewConsole = false
+
+  Run = uFldFlagManager @ NewConsole = false
+  Run = uFldTagManager  @ NewConsole = false
+
+  Run = uProcessWatch   @ NewConsole = false
+
+  Run = pHostInfo       @ NewConsole = false
+  Run = pShare          @ NewConsole = false
+  Run = uFldShoreBroker @ NewConsole = false
+  Run = uFldNodeComms   @ NewConsole = false
+
+  Run = pMarineViewer   @ NewConsole = false
+	Run = pRealm          @ NewConsole = false
+  Run = iSay            @ NewConsole = false
+  //Run = pMapMarkers     @ NewConsole = false
+}
+
+//---------------------------------------------------------
+// pShare Config Block
+
+ProcessConfig = pShare
+{
+  AppTick    = 2
+  CommsTick  = 2
+
+  input = route =  localhost:9200
+  //input = route =  localhost:$(SHARE_LISTEN)
+}
+
+
+//--------------------------------------------------
+// pHostInfo Config Block
+	
+ProcessConfig = pHostInfo
+{
+  AppTick     = 1
+  CommsTick   = 1
+
+  default_hostip_force = localhost
+}
+
+
+//--------------------------------------------------
+// uFldFlagMgr Config Block
+
+ProcessConfig = uFldFlagManager
+{
+  AppTick       = 4
+  CommsTick     = 4
+  
+  default_flag_range = 15
+
+  flag_follows_vehicle = true
+
+  near_flag_range_buffer = 5
+
+  flag = x=44.59,y=153.46, color=red, label=red, range=15
+  flag = x=106.4,y=50.6, color=blue, label=blue, range=15
+
+  grab_post = var=SAY_MOOS, sval={say={$VNAME has the $FLAG flag}}
+  //lose_post = var=SAY_MOOS, sval={say={the $FLAG flag has been reset}}
+
+  //near_post = var=SAY_MOOS, sval={say={$VNAME is near the $FLAG flag}}
+  near_post = var=SAY_MOOS, sval={file=sounds/shipbell.wav}
+  away_post = var=SAY_MOOS, sval={file=sounds/buzzer.wav}
+
+  //deny_post = var=SAY_MOOS, sval={file=sounds/sf-no-soup.wav}
+  deny_post = var=SAY_MOOS, sval={say={Grab denied $REASON}}
+
+  goal_post = var=SAY_MOOS, sval={say={$VTEAM has scored and returned the $FLAG flag}}
+  home_post = var=SAY_MOOS, sval={say={$VNAME has returned home}}
+
+  near_flag_range_buffer = 0    // Default is 2
+}
+
+//--------------------------------------------------
+// uFldTagManager Config Block
+
+ProcessConfig = uFldTagManager
+{
+  AppTick   = 4
+  CommsTick = 4
+
+  tag_range = 10     // default (meters)
+
+  post_color = white  // default
+
+  tag_circle = true
+  tag_circle_range = 5
+  tag_circle_color = "green"
+  tag_min_interval = 10
+
+  tag_duration = 10000
+
+	robot_tag_post   = TESTING=true
+	
+  //robot_tag_post   = MOOS_MANUAL_OVERRIDE_$UP_TARGET=true
+  human_tag_post   = SAY_MOOS=say={$TARGET_has_been_tagged},rate=200
+  human_tag_post   = SAY_MOOS_$UP_TARGET=say={you_have_been_tagged},rate=200
+  robot_tag_post   = SAY_MOOS=say={$TARGET_has_been_tagged},rate=200
+  robot_tag_post   = SAY_MOOS_$UP_TARGET=say={you_have_been_tagged},rate=200
+
+  // Return Flag
+  human_tag_post   = FLAG_RESET=vname=$TARGET
+  robot_tag_post   = FLAG_RESET=vname=$TARGET
+  human_tag_post   = TAGGED_$UP_TARGET=true
+  robot_tag_post   = TAGGED_$UP_TARGET=true
+
+	notag_post = SAY_MOOS_$UP_SOURCE=say={No Tag $REASON},rate=200 
+	
+  //robot_untag_post = MOOS_MANUAL_OVERRIDE_$UP_TARGET=false
+  // human_untag_post   = SAY_MOOS=say={$TARGET_has_been_untagged},rate=200
+  // human_untag_post   = SAY_MOOS_$UP_TARGET=say={you_have_been_untagged},rate=200
+
+  //robot_untag_post   = SAY_MOOS=say={$TARGET_has_been_untagged},rate=200
+  //robot_untag_post   = SAY_MOOS_$UP_TARGET=say={you_have_been_untagged},rate=200
+
+	robot_untag_post   = TEST_UNTAG=$TARGET_has_been_untagged,rate=200
+
+	human_untag_post = TAGGED_$UP_TARGET=false
+  robot_untag_post = TAGGED_$UP_TARGET=false
+
+  team_one=red
+  team_two=blue
+
+  zone_one = pts={0,150:68.57,191.2:109.77,122.63:41.2,81.43}
+  zone_two = pts={41.2,81.43:109.77,122.63:150.98,54.05:82.41,12.85}
+
+  zone_one_color = dodger_blue
+  zone_two_color = pink
+}
+
+//--------------------------------------------------
+// ufldnodecomms Config Block
+
+ProcessConfig = uFldNodeComms
+{
+  AppTick       = 2
+  CommsTick     = 2
+
+  comms_range      = 5000
+  critical_range   = 25
+
+  min_msg_interval = 0
+  max_msg_length   = 10000
+  groups           = false
+
+  view_node_rpt_pulses = false
+}
+
+//--------------------------------------------------
+// uFldShoreBroker Config Block
+
+ProcessConfig = uFldShoreBroker
+{
+  AppTick       = 1
+  CommsTick     = 1
+
+  // Note: [QBRIDGE = FOO]  is shorthand for
+  //       [BRIDGE = src=FOO_$V,  alias=FOO] and
+  //       [BRIDGE = src=FOO_ALL, alias=FOO]
+
+  qbridge  = DEPLOY, RETURN, STATION_KEEP, NODE_REPORT, NODE_MESSAGE
+  qbridge  = MOOS_MANUAL_OVERRIDE, APPCAST_REQ, AVOID, CHASE, MM_KEY
+  qbridge  = TAGGED, ACTION, LOITER_UPDATES, GO_GRAB, LED_TAGGED
+  qbridge  = SAY_MOOS, HAS_FLAG, ONFIELD, CANTAG, CANTAG_SUMMARY
+  qbridge  = MAP_MARKERS, XALIAS, MM_KEY
+
+  bridge   = src=IN_OWN_TERRITORY
+  bridge   = src=IN_ENEMY_TERRITORY
+
+  bridge   = src=UP_LOITER_$N, alias=UP_LOITER
+  bridge   = src=HELM_MAP_CLEAR, alias=HELM_MAP_CLEAR
+  bridge   = src=FLAG_SUMMARY
+}
+
+//--------------------------------------------------
+// pHostInfo Config Block
+
+ProcessConfig = pHostInfo
+{
+  AppTick     = 1
+  CommsTick   = 1
+
+  // DEFAULT_HOSTIP = localhost
+}
+
+//--------------------------------------------------
+// pLogger Config Block
+
+ProcessConfig = pLogger
+{
+  AppTick       = 10
+  CommsTick     = 10
+
+  File          = LOG_SHORESIDE
+  PATH          = ./
+  SyncLog       = true @ 0.2
+  AsyncLog      = true
+  FileTimeStamp = true
+
+  LogAuxSrc     = true
+
+  // Log it all!!!!!
+  WildCardLogging = true
+  WildCardOmitPattern = *_STATUS
+  WildCardOmitPattern = *_ITER_GAP
+  WildCardOmitPattern = *_ITER_LEN
+  WildCardOmitPattern = DB_VARSUMMARY
+  WildCardOmitPattern = DB_RWSUMMARY
+  WildCardOmitPattern = PSHARE_INPUT_SUMMARY
+  WildCardOmitPattern = PSHARE_OUTPUT_SUMMARY
+}
+
+//--------------------------------------------------------
+// uProcessWatch Config Block
+
+ProcessConfig = pMarineViewer
+{
+  AppTick    = 4
+  CommsTick  = 4
+
+  //tiff_file            = jervis_s_shgoo_18.tif
+  tiff_file            = jervis_esat_17.tif
+  set_pan_x            = 1400
+  set_pan_y            = -60
+  zoom                 = 4
+  vehicles_shape_scale = 1.0
+  vehicles_name_mode   = names
+
+  circle_viewable_all = true
+	polygon_viewable_labels = false
+	point_viewable_labels = false
+	
+  appcast_viewable = true
+  appcast_color_scheme = indigo
+	
+  scope = FLAG_GRAB_REPORT
+  scope = NODE_BROKER_PING
+  scope = DEPLOY_ALL
+
+  action = STATION_KEEP_ALL = false
+  action = STATION_KEEP_ALL = true
+  action = CHASE_ALL = false
+
+	action = MARKERS_SHOW = shoreside
+	action = MARKERS_SHOW = abe
+	action = MARKERS_SHOW = ben
+	action = MARKERS_SHOW = cal
+	action = MARKERS_SHOW = deb
+	
+  button_one   = DEPLOY  # DEPLOY_ALL=true
+  button_one   = MOOS_MANUAL_OVERRIDE_ALL=false
+  button_one   = RETURN_ALL=false # STATION_KEEP_ALL=false
+
+  button_two   = RETURN  # RETURN_ALL=true
+  button_two   = STATION_KEEP_ALL=false
+
+  button_three  = STATION   # STATION_KEEP_ALL=true
+
+  button_four  = OpField-Off # MM_KEY_ALL=off
+	button_five  = OpField-Ben # MM_KEY_ALL=ben
+	button_six   = OpField-Deb # MM_KEY_ALL=deb
+
+	button_seven = Say-Mute   # SAY_VOLUME = mute 
+	button_eight = Say-Normal # SAY_VOLUME = normal
+	button_nine  = Say-Soft   # SAY_VOLUME = soft
+	button_ten   = Say-VSoft  # SAY_VOLUME = vsoft
+
+	
+//	op_vertex = x=-85, y=-48,      lwidth=1,lcolor=yellow,looped=true,group=moa
+//  op_vertex = x=-53.1, y=-121.4, lwidth=1,lcolor=yellow,looped=true,group=moa
+//  op_vertex = x=90.9, y=-52.4,   lwidth=1,lcolor=yellow,looped=true,group=moa
+//  op_vertex = x=59, y=21,        lwidth=1,lcolor=yellow,looped=true,group=moa
+
+	// Northwest Corner
+	//op_vertex = x=-85, y=-48,        lwidth=1,lcolor=yellow,looped=true,group=moa
+	op_vertex = x=0,y=150, lwidth=1,lcolor=yellow,looped=true,group=moa
+	// Southwest Corner
+  op_vertex = x=68.57,y=191.2, lwidth=1,lcolor=yellow,looped=true,group=moa
+	// Southeast Corner
+  op_vertex = x=150.98,y=54.05, lwidth=1,lcolor=yellow,looped=true,group=moa
+	// Northeast Corner
+  op_vertex = x=82.41,y=12.85, lwidth=1,lcolor=yellow,looped=true,group=moa
+
+
+  cmd = label=DEPLOY, var=DEPLOY,  sval=true,  receivers=all:abe:ben:cal:deb
+  cmd = label=DEPLOY, var=MOOS_MANUAL_OVERRIDE, sval=false, receivers=all:abe:ben:cal:deb
+  cmd = label=DEPLOY, var=AVOID,  sval=true,  receivers=all:abe:ben:cal:deb
+  cmd = label=DEPLOY, var=RETURN,  sval=false,  receivers=all:abe:ben:cal:deb
+  cmd = label=DEPLOY, var=STATION_KEEP, sval=false, receivers=all:abe:ben:cal:deb
+
+  cmd = label=RETURN, var=RETURN, sval=true, receivers=all:abe:ben:cal:deb
+  cmd = label=RETURN, var=STATION_KEEP, sval=false, receivers=all:abe:ben:cal:deb
+
+  cmd = label=ATTACK, var=ACTION, sval=attack, receivers=all:abe:ben:cal:deb
+  cmd = label=ATTACK, var=STATION_KEEP, sval=false, receivers=all:abe:ben:cal:deb
+  cmd = label=ATTACK, var=GO_GRAB, sval=true, receivers=all:abe:ben:cal:deb
+
+  cmd = label=DEFEND, var=ACTION, sval=defend, receivers=all:abe:ben:cal:deb
+  cmd = label=DEFEND, var=STATION_KEEP, sval=false, receivers=all:abe:ben:cal:deb
+
+  cmd = label=STATION, var=STATION_KEEP,  sval=true,  receivers=all:abe:ben:cal:deb
+
+  cmd = label=STATION-OFF, var=STATION_KEEP,  sval=false,  receivers=all:abe:ben:cal:deb
+
+  cmd = label=DEFEND-PH, var=XALIAS, sval=defend_ph, receivers=abe:ben:cal:deb
+  cmd = label=DEFEND-SH, var=XALIAS, sval=defend_sh, receivers=abe:ben:cal:deb
+  cmd = label=DEFEND-CD, var=XALIAS, sval=defend_ch, receivers=abe:ben:cal:deb
+
+  cmd = label=SHOW_MARKERS, var=MM_KEY, sval=$[targ], receivers=abe:ben:cal:deb
+
+
+
+
+}
+
+//--------------------------------------------------------
+// uProcessWatch Config Block
+
+ProcessConfig = uCommand
+{
+
+  cmd = label=DEPLOY, var=DEPLOY,  sval=true,  receivers=all:abe:ben:cal:deb
+  cmd = label=DEPLOY, var=MOOS_MANUAL_OVERRIDE, sval=false, receivers=all:abe:ben:cal:deb
+  cmd = label=DEPLOY, var=AVOID,  sval=true,  receivers=all:abe:ben:cal:deb
+  cmd = label=DEPLOY, var=RETURN,  sval=false,  receivers=all:abe:ben:cal:deb
+  cmd = label=DEPLOY, var=STATION_KEEP, sval=false, receivers=all:abe:ben:cal:deb
+
+  cmd = label=RETURN, var=RETURN, sval=true, receivers=all:abe:ben:cal:deb
+  cmd = label=RETURN, var=STATION_KEEP, sval=false, receivers=all:abe:ben:cal:deb
+
+  cmd = label=ATTACK, var=ACTION, sval=attack, receivers=all:abe:ben:cal:deb
+  cmd = label=ATTACK, var=STATION_KEEP, sval=false, receivers=all:abe:ben:cal:deb
+  cmd = label=ATTACK, var=GO_GRAB, sval=true, receivers=all:abe:ben:cal:deb
+
+  cmd = label=DEFEND, var=ACTION, sval=defend, receivers=all:abe:ben:cal:deb
+  cmd = label=DEFEND, var=STATION_KEEP, sval=false, receivers=all:abe:ben:cal:deb
+
+  cmd = label=STATION, var=STATION_KEEP,  sval=true,  receivers=all:abe:ben:cal:deb
+
+  cmd = label=STATION-OFF, var=STATION_KEEP,  sval=false,  receivers=all:abe:ben:cal:deb
+
+  cmd = label=DEFEND-PH, var=XALIAS, sval=defend_ph, receivers=abe:ben:cal:deb
+  cmd = label=DEFEND-SH, var=XALIAS, sval=defend_sh, receivers=abe:ben:cal:deb
+  cmd = label=DEFEND-CD, var=XALIAS, sval=defend_ch, receivers=abe:ben:cal:deb
+
+  cmd = label=SHOW_MARKERS, var=MM_KEY, sval=$[targ], receivers=abe:ben:cal:deb
+
+
+
+
+}
+
+//--------------------------------------------------------
+// uProcessWatch Config Block
+
+ProcessConfig = uProcessWatch
+{
+  AppTick   = 1
+  CommsTick = 1
+
+  allow_retractions = true
+
+  watch_all = true      // default is true
+
+  nowatch = uXMS*
+  nowatch = uPokeDB*
+
+  summary_wait = 12
+}
+
+//------------------------------------------
+// iSay Config Block
+	
+ProcessConfig = iSay
+{
+  AppTick   = 5
+  CommsTick = 5
+
+  min_utter_interval = 1
+  interval_policy    = from_start
+
+  os_mode   = both
+  audio_dir = sounds
+  volume    = soft
+}
+
+//--------------------------------------------------
+// pMapMarkers Config Block
+
+ProcessConfig = pMapMarkers
+{
+  AppTick       = 4
+  CommsTick     = 4
+
+	//app_logging = true
+	
+	opfield = "bf=x=106.4,y=50.6 # rf=x=44.59,y=153.46"
+	opfield = "nw=x=0,y=150     # nwb=x=17.14,y=160.3 # ncb=x=34.29,y=170.6 # neb=x=51.43,y=180.9 # ne=x=68.57,y=191.2"
+	opfield = "nwwf=x=10.3,y=132.86 # nwf=x=27.44,y=143.16 # ncf=x=44.59,y=153.46 # nef=x=61.73,y=163.76 # neef=x=78.87,y=174.06"
+	opfield = "nwwh=x=20.6,y=115.71 # nwh=x=37.74,y=126.01 # nch=x=54.89,y=136.31 # neh=x=72.03,y=146.61 # neeh=x=89.17,y=156.91"
+	opfield = "nwwm=x=30.9,y=98.57 # nwm=x=48.04,y=108.87 # ncm=x=65.19,y=119.17 # nem=x=82.33,y=129.47 # neem=x=99.47,y=139.77"
+	opfield = "wc=x=41.2,y=81.43     # cpw=x=58.34,y=91.73 # cc=x=75.49,y=102.03   # cpe=x=92.63,y=112.33 # ec=x=109.77,y=122.63"
+	opfield = "swwm=x=51.5,y=64.28 # swm=x=68.64,y=74.58 # scm=x=85.79,y=84.88 # sem=x=102.93,y=95.18 # seem=x=120.07,y=105.48"
+	opfield = "swwh=x=61.8,y=47.14 # swh=x=78.94,y=57.44 # sch=x=96.09,y=67.74 # seh=x=113.23,y=78.04 # seeh=x=130.37,y=88.34"
+	opfield = "swwf=x=72.11,y=30 # swf=x=89.25,y=40.3 # scf=x=106.4,y=50.6 # sef=x=123.54,y=60.9 # seef=x=140.68,y=71.2"
+	opfield = "sw=x=82.41,y=12.85     # swb=x=99.55,y=23.15 # scb=x=116.7,y=33.45 # seb=x=133.84,y=43.75 # se=x=150.98,y=54.05"
+}
+
+	
+

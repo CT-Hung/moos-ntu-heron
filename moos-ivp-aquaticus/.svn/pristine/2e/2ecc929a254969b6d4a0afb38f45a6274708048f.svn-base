@@ -1,0 +1,40 @@
+//uTimerScript script for group 1 round 2
+
+ProcessConfig = uTimerScript                                    
+{                                                               
+  AppTick   = 4                                                 
+  CommsTick = 4                                                 
+                                                                
+ // Logic condition that must be met for script to be unpaused 
+ condition = AQUATICUS_GAME_ALL=play                            
+ // Event(s) are the key components of the script
+
+//establish group #
+  event = var=GROUP, val=1, time = 0
+//establish round #
+  event = var = ROUND, val=2, time = 0
+
+//Trial 1: E5
+  event          = var=SCENARIO, val="GAME2A", time=0
+  event          = var=ACTION_RED_ONE, val="STATION_MIDLEFT", time=0
+  event          = var=ACTION_RED_TWO, val="DEFEND", time=0
+
+//Trial 2: H3
+  event          = var=SCENARIO, val="GAME2B", time=480
+  event          = var=ACTION_RED_ONE, val="ATTACK", time=480
+  event          = var=ACTION_RED_TWO, val="DEFEND", time=480
+
+
+//Trial 3: E4
+  event          = var=SCENARIO, val="GAME2C", time=960
+  event          = var=ACTION_RED_ONE, val="STATION_MIDFIELD", time=960
+  event          = var=ACTION_RED_TWO, val="PROTECT", time=960
+  event          = var=AGGRESSIVE_RED_TWO, val="false", time=960
+
+//Trial 4: H2
+  event          = var=SCENARIO, val="GAME2D", time=1440
+  event          = var=ACTION_RED_ONE, val="ATTACK", time=1440
+  event          = var=ACTION_RED_TWO, val="ATTACK_LEFT", time=1440
+
+
+}

@@ -1,0 +1,20 @@
+
+Three groups of maps
+
+o Jervis Bay large area, zoom=18 (higher zoom more detail)
+
+  jervis_s_engeo_18.tif/info   (arcgisonline.com, NatGeo_World_Map)
+  jervis_s_osm_18.tif/info     (openstreetmap.org)
+  jervis_s_shgoo_18.tif/info   (mt.google.com)
+
+o Jervis Bay small area, zoom=17 (Captain's Beach local)
+
+  jervis_s_osm_17.info         (openstreetmap.org)
+  jervis_s_satgoo_17.info      (mt.google.com)
+  jervis_s_sgoo_17.info        (mt.google.com)(+landmarks)
+
+o Jervis Bay large area, zoom=18 (Captain's Beach local)
+
+  jervis_s_engeo_18.tif/info   (arcgisonline.com, NatGeo_World_Map)
+  jervis_s_osm_18.tif/info     (openstreetmap.org)
+  jervis_s_shgoo_18.tif/info   (mt.google.com)

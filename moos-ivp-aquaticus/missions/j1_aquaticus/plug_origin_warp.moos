@@ -1,0 +1,4 @@
+MOOSTimeWarp = $(WARP)
+
+LatOrigin  = -35.126
+LongOrigin = 150.711

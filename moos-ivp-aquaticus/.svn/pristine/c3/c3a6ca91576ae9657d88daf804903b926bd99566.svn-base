@@ -1,0 +1,14 @@
+//------------------------------------------------
+// pFieldSensor config block
+//pFieldSensor will take all contacts and assign them a quadrant I-IV
+
+ProcessConfig = pFieldSensor
+{
+   AppTick   = 4
+   CommsTick = 4
+
+   upperY = 80
+   lowerY = 0
+   leftX = 0
+   rightX = 160
+}

@@ -1,0 +1,11 @@
+// Generated with Anaxi Tile Downloader
+//cmd= tsdl.py -35.112402 150.756229 -35.137507 150.694408 17 https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/%zoom%/%yTile%/%xTile%
+
+lat_north = -35.11092180970475
+lat_south = -35.14012515937233
+lon_east  = 150.7598876953125
+lon_west  = 150.6939697265625
+datum_lat = -35.125
+datum_lon = 150.72
+
+

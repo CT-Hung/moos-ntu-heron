@@ -1,0 +1,23 @@
+//--------------------------------------------------
+// pMapMarkers Configuration Block
+
+ProcessConfig = pMapMarkers
+{
+  AppTick       = 4
+  CommsTick     = 4
+
+	//app_logging = true
+	
+	opfield = "bf=$(BF) # rf=$(RF)"
+	opfield = "nw=$(NW)     # nwb=$(NWB) # ncb=$(NCB) # neb=$(NEB) # ne=$(NE)"
+	opfield = "nwwf=$(NWWF) # nwf=$(NWF) # ncf=$(NCF) # nef=$(NEF) # neef=$(NEEF)"
+	opfield = "nwwh=$(NWWH) # nwh=$(NWH) # nch=$(NCH) # neh=$(NEH) # neeh=$(NEEH)"
+	opfield = "nwwm=$(NWWM) # nwm=$(NWM) # ncm=$(NCM) # nem=$(NEM) # neem=$(NEEM)"
+	opfield = "wc=$(WC)     # cpw=$(CPW) # cc=$(CC)   # cpe=$(CPE) # ec=$(EC)"
+	opfield = "swwm=$(SWWM) # swm=$(SWM) # scm=$(SCM) # sem=$(SEM) # seem=$(SEEM)"
+	opfield = "swwh=$(SWWH) # swh=$(SWH) # sch=$(SCH) # seh=$(SEH) # seeh=$(SEEH)"
+	opfield = "swwf=$(SWWF) # swf=$(SWF) # scf=$(SCF) # sef=$(SEF) # seef=$(SEEF)"
+	opfield = "sw=$(SW)     # swb=$(SWB) # scb=$(SCB) # seb=$(SEB) # se=$(SE)"
+}
+
+	

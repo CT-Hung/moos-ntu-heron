@@ -1,0 +1,29 @@
+
+  cmd = label=DEPLOY, var=DEPLOY,  sval=true,  receivers=all:$(VNAMES)
+  cmd = label=DEPLOY, var=MOOS_MANUAL_OVERRIDE, sval=false, receivers=all:$(VNAMES)
+  cmd = label=DEPLOY, var=AVOID,  sval=true,  receivers=all:$(VNAMES)
+  cmd = label=DEPLOY, var=RETURN,  sval=false,  receivers=all:$(VNAMES)
+  cmd = label=DEPLOY, var=STATION_KEEP, sval=false, receivers=all:$(VNAMES)
+
+  cmd = label=RETURN, var=RETURN, sval=true, receivers=all:$(VNAMES)
+  cmd = label=RETURN, var=STATION_KEEP, sval=false, receivers=all:$(VNAMES)
+
+  cmd = label=ATTACK, var=ACTION, sval=attack, receivers=all:$(VNAMES)
+  cmd = label=ATTACK, var=STATION_KEEP, sval=false, receivers=all:$(VNAMES)
+  cmd = label=ATTACK, var=GO_GRAB, sval=true, receivers=all:$(VNAMES)
+
+  cmd = label=DEFEND, var=ACTION, sval=defend, receivers=all:$(VNAMES)
+  cmd = label=DEFEND, var=STATION_KEEP, sval=false, receivers=all:$(VNAMES)
+
+  cmd = label=STATION, var=STATION_KEEP,  sval=true,  receivers=all:$(VNAMES)
+
+  cmd = label=STATION-OFF, var=STATION_KEEP,  sval=false,  receivers=all:$(VNAMES)
+
+  cmd = label=DEFEND-PH, var=XALIAS, sval=defend_ph, receivers=$(VNAMES)
+  cmd = label=DEFEND-SH, var=XALIAS, sval=defend_sh, receivers=$(VNAMES)
+  cmd = label=DEFEND-CD, var=XALIAS, sval=defend_ch, receivers=$(VNAMES)
+
+  cmd = label=SHOW_MARKERS, var=MM_KEY, sval=$[targ], receivers=$(VNAMES)
+
+
+

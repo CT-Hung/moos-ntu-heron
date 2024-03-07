@@ -1,0 +1,11 @@
+To launch the simulation:
+./launch_simulation.sh 4 --auto=high --group=1 --round=1
+
+keep time warp 4 constant -- other timing related things such as timer scripts rely on time warp of 4
+
+--auto can be either low or high
+--group=1 always
+
+--round can be 1 or 2 for this set of experiments
+
+there are three critical buttons for the Aquaticus game: Quickly press buttons 1 and 2 in order 1) at the top of the window there is a an 'ACTION' drop down menu. Click on 'Aquaticus Game All = Play' 2) the 'DEPLOY' button on the lower right of the GUI 3) at the end of the 8 minute round -- again access the 'ACTION' drop down menu, this time clicking on the 'Aquaticus Game All = stop' button.

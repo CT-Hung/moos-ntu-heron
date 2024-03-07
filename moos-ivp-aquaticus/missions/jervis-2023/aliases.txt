@@ -1,0 +1,68 @@
+
+# 234678
+# user/searobot
+
+# Jervis router: 192.168.1.99
+
+# Meanings
+#------------------------------------------------------------
+#       sshr2: ssh onto Robot 2
+#      pingr2: ping 
+#   mvr2 file: Copy file in to Robot 2's /home/user directory
+#  mvfr2 file: Copy file from Robot 2's /home/user directory
+# mvfr2l file: Copy file from Robot 2's /var/log directory
+#   rsr2 file: Rsync all files from Robot 2's /var/log directory
+
+#--------------------------------------------------------- Robot 2
+alias   sshr2='ssh -l user 192.168.1.22'
+alias  pingr2='ping 192.168.1.22'
+
+mvr2()   { scp -rp $1 user@192.168.1.22:/home/user; }
+mvfr2()  { scp -rp user@192.168.1.22:/home/user/$1 .; }
+mvfr2l() { scp -rp user@192.168.1.22:/var/log/$1 .; }
+rsr2()   { rsync -aP  user@192.168.1.22:/var/log/$1 .; }
+
+#--------------------------------------------------------- Robot 3
+alias   sshr3='ssh -l user 192.168.1.32'
+alias  pingr3='ping 192.168.1.32'
+
+mvr3()   { scp -rp $1 user@192.168.1.32:/home/user; }
+mvfr3()  { scp -rp user@192.168.1.32:/home/user/$1 .; }
+mvfr3l() { scp -rp user@192.168.1.32:/var/log/$1 .; }
+rsr3()   { rsync -aP  user@192.168.1.32:/var/log/$1 .; }
+
+#--------------------------------------------------------- Robot 4
+alias   sshr4='ssh -l user 192.168.1.42'
+alias  pingr4='ping 192.168.1.42'
+
+mvr4()   { scp -rp $1 user@192.168.1.42:/home/user; }
+mvfr4()  { scp -rp user@192.168.1.42:/home/user/$1 .; }
+mvfr4l() { scp -rp user@192.168.1.42:/var/log/$1 .; }
+rsr4()   { rsync -aP  user@192.168.1.42:/var/log/$1 .; }
+
+#--------------------------------------------------------- Robot 6
+alias   sshr6='ssh -l user 192.168.1.62'
+alias  pingr6='ping 192.168.1.62'
+
+mvr6()   { scp -rp $1 user@192.168.1.62:/home/user; }
+mvfr6()  { scp -rp user@192.168.1.62:/home/user/$1 .; }
+mvfr6l() { scp -rp user@192.168.1.62:/var/log/$1 .; }
+rsr6()   { rsync -aP  user@192.168.1.62:/var/log/$1 .; }
+
+#--------------------------------------------------------- Robot 7
+alias   sshr7='ssh -l user 192.168.1.72'
+alias  pingr7='ping 192.168.1.72'
+
+mvr7()   { scp -rp $1 user@192.168.1.72:/home/user; }
+mvfr7()  { scp -rp user@192.168.1.72:/home/user/$1 .; }
+mvfr7l() { scp -rp user@192.168.1.72:/var/log/$1 .; }
+rsr7()   { rsync -aP  user@192.168.1.72:/var/log/$1 .; }
+
+#--------------------------------------------------------- Robot 8
+alias   sshr8='ssh -l user 192.168.1.82'
+alias  pingr8='ping 192.168.1.82'
+
+mvr8()   { scp -rp $1 user@192.168.1.82:/home/user; }
+mvfr8()  { scp -rp user@192.168.1.82:/home/user/$1 .; }
+mvfr8l() { scp -rp user@192.168.1.82:/var/log/$1 .; }
+rsr8()   { rsync -aP  user@192.168.1.82:/var/log/$1 .; }

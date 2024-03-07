@@ -1,0 +1,103 @@
+
+Tag manager optional config:
+
+Tag cooling period applies to N vehcles trying to tag 1 vehicle
+
+Tag cooling period gets longer and longer with each tag per vehicle
+
+Tag cooling is different depending on whether the tagged vehicle
+has the flag or not:
+
+  1. Tag cooling period is shorter if tagging a vehicle with a flag
+  2. Cooling period does not increase, or increases less, if the
+     tagged vehicle as the flag
+
+Vehicle's have different capabilities before long.
+Defensive stalemates end up 
+
+
+5 points for getting flag all the way back
+1 point for getting the flag
+
+* once the vehicle with the flag is back on the home side,
+there is essentially nothing to stop it.
+
+o A vehicle WITH A FLAG ON ITS HOMESide, cannot apply a tag
+to a vehicle without a flag. Can apply a tag to a vehicle
+with a flag
+
+
+Have we settled on a competition configuration for FlagManager
+and TagManager? Have we guaranteed competitors that this configuration
+will not change?
+
+Also, what is the shorebroker configuration for sharing variables
+out to vehicles? Can we assume that all variables posted by Flag
+Manager and Tag Manager of the form FOOBAR_VNAME will be shared out
+to the right vehicle?
+
+
+Anti-Hacking measures
+
+  o Vehicle could change group name if they hacked pNodeReporter to
+    change to the other group for a brief period
+
+Is there a way to have any app provide a unique hash or fingerprint
+to ensure that the app that is running has not been modified by a
+bad actor?
+
+App produces a hash based on the compilation process. Validator
+creates a
+
+
+Cyberhacks are DISALLOWED but largely unchecked. Can we have a
+discussion at AUS to discuss possible hacks and whether to (a) add
+countermeasurs (b) forbid and rely on compliance, (c) or leave
+open and let a hacker be rewarded.
+
+
+Intercept behavior:
+
+cut range
+when in tag range, post single tag request
+optionally delay the tag until enemy has the flag? or close to the flag?
+
+After vehicle has been tagged a number of times, it only has to go
+back over to its home side to reset itself, or it can untag by staying
+where it is (N meter radius) for some number of seconds. Or zero speed
+for some number of seconds.
+
+NODE_REPORTER must be UNHACKABLE
+
+
+
+launch.sh
+launch_vehicle.sh
+launch_shoreside.sh
+clean.sh
+
+meta_shoreside.moos
+meta_vehicle.moos
+meta_vehicle.bhv
+plugs.moos
+
+
+Launch scripts:
+
+Goal: One mission file for
+
+- Simulation
+- Headless Simulation
+- In-water Experiments
+
+
+o The launch.sh script will launch simulation, with flags supporting
+headless simulation. It will invoke launch_vehicle.sh and
+launch_shoreside.sh
+
+o The launch_shoreside.sh script is called by launch.sh, but also
+is launched directly on the shoreside computer when launched at
+the Pavilion or similar in-field station
+
+o The launch_vehicle.sh script
+

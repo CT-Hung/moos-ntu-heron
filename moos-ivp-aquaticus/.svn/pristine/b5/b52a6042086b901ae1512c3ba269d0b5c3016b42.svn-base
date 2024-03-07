@@ -1,0 +1,13 @@
+//------------------------------------------------
+// pAquaticusStateMgr config block
+
+ProcessConfig = pAquaticusStateMgr
+{
+   AppTick   = 4
+   CommsTick = 4
+
+   team_name=blue
+   home_zone=-100,-100,-100,100,100,100,100,-100
+   high_value_pt=-52,-70
+}
+

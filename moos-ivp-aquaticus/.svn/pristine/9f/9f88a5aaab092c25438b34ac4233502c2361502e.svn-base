@@ -1,0 +1,9 @@
+// Generated with Anaxi Tile Downloader
+// cmd= tsdl.py -35.117609 150.730675 -35.133130 150.695099 17 https://mt.google.com/vt/lyrs=y&x=%xTile%&y=%yTile%&z=%zoom%
+
+lat_north = -35.115415314253596
+lat_south = -35.135633017927184
+lon_east  = 150.73516845703125
+lon_west  = 150.6939697265625
+datum_lat = -35.12
+datum_lon = 150.71

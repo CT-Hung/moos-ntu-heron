@@ -1,0 +1,9 @@
+// Generated with Anaxi Tile Downloader
+// cmd= tsdl.py -35.117609 150.730675 -35.133130 150.695099 18 http://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/%zoom%/%yTile%/%xTile%
+
+lat_north = -35.116538651671725
+lat_south = -35.13450994383591
+lon_east  = 150.732421875
+lon_west  = 150.6939697265625
+datum_lat = -35.12
+datum_lon = 150.71
